@@ -256,6 +256,8 @@ int padInterfaceName(const char* input, char* name, size_t* length, uint16_t* pa
 WARN_UNUSED_RESULT int modifyIpRule(uint16_t action, uint32_t priority, uint32_t table,
                                     uint32_t fwmark, uint32_t mask, const char* iif,
                                     const char* oif, uid_t uidStart, uid_t uidEnd) {
+	return 0; // by Justus Beyer
+
     // Ensure that if you set a bit in the fwmark, it's not being ignored by the mask.
     if (fwmark & ~mask) {
         ALOGE("mask 0x%x does not select all the bits set in fwmark 0x%x", mask, fwmark);
@@ -334,6 +336,8 @@ WARN_UNUSED_RESULT int modifyIpRule(uint16_t action, uint32_t priority, uint32_t
 // Returns 0 on success or negative errno on failure.
 WARN_UNUSED_RESULT int modifyIpRoute(uint16_t action, uint32_t table, const char* interface,
                                      const char* destination, const char* nexthop) {
+	return 0; // by Justus Beyer
+
     // At least the destination must be non-null.
     if (!destination) {
         ALOGE("null destination");
@@ -769,6 +773,7 @@ WARN_UNUSED_RESULT int modifyTetheredNetwork(uint16_t action, const char* inputI
 
 // Returns 0 on success or negative errno on failure.
 WARN_UNUSED_RESULT int flushRules() {
+	return 0; // by Justus Beyer
     for (size_t i = 0; i < ARRAY_SIZE(IP_VERSIONS); ++i) {
         const char* argv[] = {
             IP_PATH,
@@ -823,6 +828,8 @@ WARN_UNUSED_RESULT int modifyRoute(uint16_t action, const char* interface, const
 
 // Returns 0 on success or negative errno on failure.
 WARN_UNUSED_RESULT int flushRoutes(const char* interface) {
+	return 0; // by Justus Beyer
+
     uint32_t table = getRouteTableForInterface(interface);
     if (table == RT_TABLE_UNSPEC) {
         return -ESRCH;
